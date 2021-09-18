@@ -10,54 +10,48 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_15_232711) do
+ActiveRecord::Schema.define(version: 2021_09_18_165713) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "bookmark_categories", force: :cascade do |t|
-    t.bigint "bookmark_id"
-    t.bigint "category_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["bookmark_id"], name: "index_bookmark_categories_on_bookmark_id"
-    t.index ["category_id"], name: "index_bookmark_categories_on_category_id"
-  end
-
-  create_table "bookmark_types", force: :cascade do |t|
-    t.bigint "bookmark_id"
-    t.bigint "type_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["bookmark_id"], name: "index_bookmark_types_on_bookmark_id"
-    t.index ["type_id"], name: "index_bookmark_types_on_type_id"
-  end
-
-  create_table "bookmarks", force: :cascade do |t|
-    t.string "title"
-    t.string "url"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table "bookmarks_categories", id: false, force: :cascade do |t|
+    t.bigint "bookmark_id", null: false
+    t.bigint "category_id", null: false
+    t.index ["bookmark_id", "category_id"], name: "index_bookmarks_categories_on_bookmark_id_and_category_id"
+    t.index ["category_id", "bookmark_id"], name: "index_bookmarks_categories_on_category_id_and_bookmark_id"
   end
 
   create_table "categories", force: :cascade do |t|
-    t.string "title"
+    t.string "name"
     t.boolean "public"
     t.bigint "category_id"
+    t.bigint "type_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_categories_on_category_id"
+    t.index ["type_id"], name: "index_categories_on_type_id"
+  end
+
+  create_table "markers", force: :cascade do |t|
+    t.string "name"
+    t.string "url"
+    t.bigint "category_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_markers_on_category_id"
   end
 
   create_table "types", force: :cascade do |t|
-    t.string "title"
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "category_id"
+    t.index ["category_id"], name: "index_types_on_category_id"
   end
 
-  add_foreign_key "bookmark_categories", "bookmarks"
-  add_foreign_key "bookmark_categories", "categories"
-  add_foreign_key "bookmark_types", "bookmarks"
-  add_foreign_key "bookmark_types", "types"
   add_foreign_key "categories", "categories"
+  add_foreign_key "categories", "types"
+  add_foreign_key "markers", "categories"
+  add_foreign_key "types", "categories"
 end

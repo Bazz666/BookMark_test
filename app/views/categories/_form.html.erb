@@ -16,10 +16,13 @@
     <%= form.text_field :title %>
   </div>
 
+  
+
   <div class="field">
-    <%= form.label :public %>
-    <%= form.check_box :public %>
+    <%= form.label :public_category? %>
+    <%= form.select :public,[true,false] %>
   </div>
+
 
   <div class="actions">
     <%= form.submit %>
