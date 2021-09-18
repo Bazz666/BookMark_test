@@ -2,28 +2,42 @@
 
 <h1>Bookmarks</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Url</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
 
-  <tbody>
-    <% @bookmarks.each do |bookmark| %>
-      <tr>
-        <td><%= bookmark.title %></td>
-        <td><%= bookmark.url %></td>
-        <td><%= link_to 'Show', bookmark %></td>
-        <td><%= link_to 'Edit', edit_bookmark_path(bookmark) %></td>
-        <td><%= link_to 'Destroy', bookmark, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+
+<button type="button" class="btn btn-success my-2"><%=  render 'form', bookmark: @bookmark %> </button>
+<div id='newBookMark'></div>
+
+<div class= 'card-deck'>
+
+  <div class="card mx-auto col-md- mb-2">
+    <div class="row">
+    
+  <% @bookmarks.each do |bookmark| %>  
+    
+    <div class="col-md-4">
+      <div class="card-header">
+        <h4> <%= bookmark.name %></h4> 
+        <h5 class="card-body pr-4"><%= bookmark.url %> </h5>
+        <div><p class="card-user pr-4">
+          <%= bookmark.categories.each do |c| %>
+              <%= c %> <br>
+          <% end %></p>
+        </div>
+        
+        <small class="text-muted display-12">created_at : <%= link_to time_ago_in_words(bookmark.created_at),bookmark %></small>
+        
+      </div>
+    </div>
+  <% end %>
+  <br>
+  <hr>
+
+</div>
+</div>
+  
+  
+
 
 <br>
 
-<%= link_to 'New Bookmark', new_bookmark_path %>
+

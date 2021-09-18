@@ -1,29 +1,19 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
+  <p id="notice"><%= notice %></p>
 
-<h1>Categories</h1>
+  
+  
+<div id='newPost'>
+<h4>New Category</h4>
+  <button type="button" class="btn btn-success my-2"><%= render 'form', category: @category %></button>
+</div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Public</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
 
-  <tbody>
-    <% @categories.each do |category| %>
-      <tr>
-        <td><%= category.title %></td>
-        <td><%= category.public %></td>
-        <td><%= link_to 'Show', category %></td>
-        <td><%= link_to 'Edit', edit_category_path(category) %></td>
-        <td><%= link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<h2>Categories</h2>
 
-<br>
-
-<%= link_to 'New Category', new_category_path %>
+  <ul id="allCategories">
+    <%= render @categories%>
+  </ul>
+  <br>
+  
+</div>

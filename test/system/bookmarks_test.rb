@@ -14,7 +14,7 @@ class BookmarksTest < ApplicationSystemTestCase
     visit bookmarks_url
     click_on "New Bookmark"
 
-    fill_in "Title", with: @bookmark.title
+    fill_in "Name", with: @bookmark.name
     fill_in "Url", with: @bookmark.url
     click_on "Create Bookmark"
 
@@ -26,7 +26,7 @@ class BookmarksTest < ApplicationSystemTestCase
     visit bookmarks_url
     click_on "Edit", match: :first
 
-    fill_in "Title", with: @bookmark.title
+    fill_in "Name", with: @bookmark.name
     fill_in "Url", with: @bookmark.url
     click_on "Update Bookmark"
 

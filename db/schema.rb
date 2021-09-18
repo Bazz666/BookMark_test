@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_18_165713) do
+ActiveRecord::Schema.define(version: 2021_09_18_171854) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "bookmarks", force: :cascade do |t|
+    t.string "name"
+    t.string "url"
+    t.bigint "category_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_bookmarks_on_category_id"
+  end
 
   create_table "bookmarks_categories", id: false, force: :cascade do |t|
     t.bigint "bookmark_id", null: false
@@ -33,15 +42,6 @@ ActiveRecord::Schema.define(version: 2021_09_18_165713) do
     t.index ["type_id"], name: "index_categories_on_type_id"
   end
 
-  create_table "markers", force: :cascade do |t|
-    t.string "name"
-    t.string "url"
-    t.bigint "category_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["category_id"], name: "index_markers_on_category_id"
-  end
-
   create_table "types", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -50,8 +50,8 @@ ActiveRecord::Schema.define(version: 2021_09_18_165713) do
     t.index ["category_id"], name: "index_types_on_category_id"
   end
 
+  add_foreign_key "bookmarks", "categories"
   add_foreign_key "categories", "categories"
   add_foreign_key "categories", "types"
-  add_foreign_key "markers", "categories"
   add_foreign_key "types", "categories"
 end

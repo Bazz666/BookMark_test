@@ -1,9 +1,13 @@
 class CategoriesController < ApplicationController
   before_action :set_category, only: %i[ show edit update destroy ]
+  before_action :set_categories, only: [:index, :edit, :new]
 
   # GET /categories or /categories.json
   def index
     @categories = Category.all
+    @category = Category.new
+    @categories_ids = Category.all.map{ |category| [category.name, category.id]}
+    @types = Type.all
   end
 
   # GET /categories/1 or /categories/1.json
@@ -22,37 +26,57 @@ class CategoriesController < ApplicationController
   # POST /categories or /categories.json
   def create
     @category = Category.new(category_params)
-
-    respond_to do |format|
-      if @category.save
-        format.html { redirect_to @category, notice: "Category was successfully created." }
-        format.json { render :show, status: :created, location: @category }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @category.errors, status: :unprocessable_entity }
-      end
+    unless @category.save
+      render json: @category.errors, status: :unprocessable_entity
     end
   end
 
+  # def api
+  #   @bookmarks = bookmark.all
+  #   @category_api = Category.where(public: true)
+  #   hash_final = {}
+  #   bookmark_array = []
+  #   category_array = []
+
+  #   @bookmarks.each do |m|
+  #     obj_bookmark = {
+  #       name: m.name,
+  #       url: m.url,
+  #     } 
+  #     bookmark_array.push(obj_bookmark)
+  #   end
+    
+  #   hash_final[:bookmarks] = bookmark_array
+
+  #   @category_api.each do |c|
+  #     obj_cat = {
+  #       name: c.name,
+  #       public: c.public,
+  #       type_name: c.name_type,
+        
+  
+  #     } 
+  #     category_array.push(obj_cat)
+  #   end
+  #   hash_final[:Categories] = category_array
+  #   render json: hash_final
+    
+  # end
+
+
   # PATCH/PUT /categories/1 or /categories/1.json
   def update
-    respond_to do |format|
-      if @category.update(category_params)
-        format.html { redirect_to @category, notice: "Category was successfully updated." }
-        format.json { render :show, status: :ok, location: @category }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @category.errors, status: :unprocessable_entity }
-      end
-    end
+    @category.update(category_params)
   end
 
   # DELETE /categories/1 or /categories/1.json
   def destroy
-    @category.destroy
-    respond_to do |format|
-      format.html { redirect_to categories_url, notice: "Category was successfully destroyed." }
-      format.json { head :no_content }
+    if @category.destroy
+      @categories = Category.all.order(updated_at: :desc)
+      respond_to do |format|
+        format.js { render nothing: true }
+        format.html { redirect_to categories_url, notice: "Post was successfully destroyed." }
+      end
     end
   end
 
@@ -62,8 +86,12 @@ class CategoriesController < ApplicationController
       @category = Category.find(params[:id])
     end
 
+    def set_categories
+      @categories_ids = Category.all.map{ |category| [category.name, category.id]}
+    end
+
     # Only allow a list of trusted parameters through.
     def category_params
-      params.require(:category).permit(:title, :public)
+      params.require(:category).permit(:name, :public, :category_id, :type_id)
     end
 end

@@ -14,7 +14,7 @@ class TypesTest < ApplicationSystemTestCase
     visit types_url
     click_on "New Type"
 
-    fill_in "Title", with: @type.title
+    fill_in "Name", with: @type.name
     click_on "Create Type"
 
     assert_text "Type was successfully created"
@@ -25,7 +25,7 @@ class TypesTest < ApplicationSystemTestCase
     visit types_url
     click_on "Edit", match: :first
 
-    fill_in "Title", with: @type.title
+    fill_in "Name", with: @type.name
     click_on "Update Type"
 
     assert_text "Type was successfully updated"

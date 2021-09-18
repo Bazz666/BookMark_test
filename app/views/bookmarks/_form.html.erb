@@ -1,4 +1,4 @@
-<%= form_with(model: bookmark, local: true) do |form| %>
+<%= form_with(model: bookmark, remote: true, data: {confirm: 'continue?'}) do |form| %>
   <% if bookmark.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(bookmark.errors.count, "error") %> prohibited this bookmark from being saved:</h2>
@@ -11,9 +11,21 @@
     </div>
   <% end %>
 
+
+
   <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title %>
+    <%= form.label :categories %><br>
+    <%= form.collection_check_boxes(:category_ids, Category.all,
+      :id, :name) do |b| %> 
+        <%= b.label class:"label-checkbox" do%>
+          <%=b.check_box + b.text%> 
+        <%end%>
+    <% end %> 
+  </div>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
   </div>
 
   <div class="field">
@@ -21,16 +33,7 @@
     <%= form.text_field :url %>
   </div>
 
-  <div class="field">
-    <%= form.label :category_id %>
-    <%= form.collection_select :category_id, Category.all, :id, :title, prompt: "Selecciona categoría" %>
-  </div>
-  <div class="field">
-      <%= form.label :type_id %>
-      <%= form.collection_select :type_id , Type.all, :id, :title, prompt: true  %>
-  </div>
-
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit data: {disable_with: 'Creando'} %>
   </div>
 <% end %>

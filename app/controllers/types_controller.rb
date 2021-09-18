@@ -1,9 +1,11 @@
 class TypesController < ApplicationController
   before_action :set_type, only: %i[ show edit update destroy ]
+  
 
   # GET /types or /types.json
   def index
     @types = Type.all
+    @categories = Category.all
   end
 
   # GET /types/1 or /types/1.json
@@ -64,6 +66,6 @@ class TypesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def type_params
-      params.require(:type).permit(:title)
+      params.require(:type).permit(:name)
     end
 end

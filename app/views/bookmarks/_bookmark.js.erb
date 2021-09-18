@@ -1,0 +1,12 @@
+<div class="container">
+
+    <p id="<%= bookmark.id%>">
+        <strong><%= bookmark.name %></strong>
+        <p><%= bookmark.name_category[0] %></p>
+        <p><a href=<%= bookmark.url %> target="_blanck"><%= bookmark.url %></a></p>
+        <%= link_to 'Show', bookmark, remote: true , class: "btn btn-light" %>
+        <%= link_to 'Edit', edit_bookmark_path(bookmark), remote: true,class: "btn btn-light" %>
+        <%= link_to 'Destroy', bookmark, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-light" %></td><hr>
+    </p>
+
+</div>

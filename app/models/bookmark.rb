@@ -1,7 +1,8 @@
 class Bookmark < ApplicationRecord
-    has_many :bookmark_categories
-    has_many :categories, through: :bookmark_categories
+    has_and_belongs_to_many :categories, dependent: :nullify
 
-    has_many :bookmark_types
-    has_many :types, through: :bookmark_types
+
+    def name_category
+        Category.references(:bookmarks).where(id: category_id).pluck :name
+    end
 end
