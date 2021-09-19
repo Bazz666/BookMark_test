@@ -1,24 +1,28 @@
+
 body {
-    background-color: rgb(238, 79, 51);
+    background-color: rgb(235, 234, 241);
     font-family: 'Grechen Fuemen', cursive;
     text-decoration-color: black;
     font-weight: bold;
-    background: linear-gradient(to right, #ddd8d3d8, #e1efbb);
+    background: linear-gradient(to right, #ddd8d3d8, #a3afb1);
     display: flex;
     flex-direction: column;
-
     margin: 0;
 }
+
 .card {
 
-    background-color: #eee;
     border-radius: 10px;
     box-shadow: 0 3px 15px rgba(100, 100, 100, 0.5);
     margin: 10px;
     padding: 20px;
     text-align: center;
-    
+    text-justify: auto;
+    font-size: inherit;
+    border-radius: 20px;
+    display:inline-block;
 }
+
 
 .btn {
     
@@ -26,6 +30,17 @@ body {
     padding: 5px 10px;
     border-radius: 10px;
     font-size: 0.8em;
-    color: black;
+    
 }
 
+.label-checkbox {
+    
+    content: '\00f096';
+    text-align: center;
+    width: auto;
+    padding: 2px 0 0 3px;
+    margin-right: auto;
+    text-transform: capitalize;
+    
+    
+}

@@ -15,13 +15,14 @@
 
   <div class="field">
     <%= form.label :categories %><br>
-    <%= form.collection_check_boxes(:category_ids, Category.all,
+    <%= form.collection_radio_buttons(:category_ids, Category.all,
       :id, :name) do |b| %> 
-        <%= b.label class:"label-checkbox" do%>
-          <%=b.check_box + b.text%> 
+        <%= b.label class:"label-checkbox " do%>
+          <%=b.radio_button + b.text%> 
         <%end%>
     <% end %> 
   </div>
+  
 
   <div class="field">
     <%= form.label :name %>

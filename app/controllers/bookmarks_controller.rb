@@ -40,7 +40,7 @@ class BookmarksController < ApplicationController
     if @bookmark.destroy
       @bookmarks = Bookmark.all.order(updated_at: :desc)
       respond_to do |format|
-        format.js { render nothing: true }
+        format.js { }
         format.html { redirect_to posts_url, notice: "Post was successfully destroyed." }
       end
     end
