@@ -31,37 +31,38 @@ class CategoriesController < ApplicationController
     end
   end
 
-  # def api
-  #   @bookmarks = bookmark.all
-  #   @category_api = Category.where(public: true)
-  #   hash_final = {}
-  #   bookmark_array = []
-  #   category_array = []
+    #api Metod
+  def api
+    @bookmarks = Bookmark.all
+    @category_api = Category.where(public: true)
+    hash_final = {}
+    bookmark_array = []
+    category_array = []
 
-  #   @bookmarks.each do |m|
-  #     obj_bookmark = {
-  #       name: m.name,
-  #       url: m.url,
-  #     } 
-  #     bookmark_array.push(obj_bookmark)
-  #   end
+    @bookmarks.each do |m|
+      obj_bookmark = {
+        name: m.name,
+        url: m.url,
+      } 
+      bookmark_array.push(obj_bookmark)
+    end
     
-  #   hash_final[:bookmarks] = bookmark_array
+    hash_final[:bookmarks] = bookmark_array
 
-  #   @category_api.each do |c|
-  #     obj_cat = {
-  #       name: c.name,
-  #       public: c.public,
-  #       type_name: c.name_type,
-        
-  
-  #     } 
-  #     category_array.push(obj_cat)
-  #   end
-  #   hash_final[:Categories] = category_array
-  #   render json: hash_final
+    @category_api.each do |c|
+      obj_cat = {
+        name: c.name,
+        public: c.public,
+        type_name: c.name_type,
+      
+      } 
+      category_array.push(obj_cat)
+    end
+
+    hash_final[:Categories] = category_array
+    render json: hash_final
     
-  # end
+  end
 
 
   # PATCH/PUT /categories/1 or /categories/1.json

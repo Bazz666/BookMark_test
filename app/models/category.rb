@@ -4,6 +4,7 @@ class Category < ApplicationRecord
   
   belongs_to :type , optional: true
   has_many :Bookmarks, dependent: :destroy
+  validates :name, presence: true
 
   def to_s
     name

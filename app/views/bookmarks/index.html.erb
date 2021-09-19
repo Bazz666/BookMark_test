@@ -4,35 +4,35 @@
 
 
 
-<button type="button" class="btn btn-success my-2"><%=  render 'form', bookmark: @bookmark %> </button>
+<button type="button" class="btn  my-2"><%=  render 'form', bookmark: @bookmark %> </button>
 <div id='newBookMark'></div>
 
-<div class= 'card-deck'>
+  <div class= 'card-deck'>
 
-  <div class="card mx-auto col-md- mb-2">
-    <div class="row">
-    
-  <% @bookmarks.each do |bookmark| %>  
-    
-    <div class="col-md-4">
-      <div class="card-header">
-        <h4> <%= bookmark.name %></h4> 
-        <h5 class="card-body pr-4"><%= bookmark.url %> </h5>
-        <div><p class="card-user pr-4">
-          <%= bookmark.categories.each do |c| %>
-              <%= c %> <br>
-          <% end %></p>
+    <div class="card mx-auto col-md- mb-2">
+      <div class="row">
+      
+    <% @bookmarks.each do |bookmark| %>  
+      
+      <div class="col-md-4">
+        <div class="card-header">
+          <h4> <%= bookmark.name %></h4> 
+          <h5 class="card-body pr-4"><%= bookmark.url %> </h5>
+          <div><p class="card-user pr-4">
+            <%= bookmark.categories.each do |c| %>
+                <%= c %> <br>
+            <% end %></p>
+          </div>
+          
+          <small class="text-muted display-12">created_at : <%= link_to time_ago_in_words(bookmark.created_at),bookmark %></small>
+          
         </div>
-        
-        <small class="text-muted display-12">created_at : <%= link_to time_ago_in_words(bookmark.created_at),bookmark %></small>
-        
       </div>
-    </div>
-  <% end %>
-  <br>
-  <hr>
+    <% end %>
+    <br>
+    <hr>
 
-</div>
+  </div>
 </div>
   
   
