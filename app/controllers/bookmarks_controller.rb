@@ -38,7 +38,7 @@ class BookmarksController < ApplicationController
   # DELETE /bookmarks/1 or /bookmarks/1.json
   def destroy
     if @bookmark.destroy
-      @bookmarks = bookmark.all.order(updated_at: :desc)
+      @bookmarks = Bookmark.all.order(updated_at: :desc)
       respond_to do |format|
         format.js { render nothing: true }
         format.html { redirect_to posts_url, notice: "Post was successfully destroyed." }
@@ -49,7 +49,7 @@ class BookmarksController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_bookmark
-      @bookmark = bookmark.find(params[:id])
+      @bookmark = Bookmark.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.

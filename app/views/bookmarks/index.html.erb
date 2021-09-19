@@ -12,8 +12,8 @@
     
   <% @bookmarks.each do |bookmark| %>  
     
-    <div id = "<%=@bookmark.id%>" class="col-md-4">
-      <div class="card-header">
+    <div  class="col-md-4">
+      <div id = "<%=@bookmark.id%>"class="card-header">
         <h4> <%= bookmark.name %></h4> 
         <h5 class="card-body pr-4"><%= bookmark.url %> </h5>
         <div><p class="card-user pr-4">
