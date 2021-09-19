@@ -3,36 +3,37 @@
 <h1>Bookmarks</h1>
 
 
+<div id='newBookMark'><button type="button" class="btn  my-2"><%=  render 'form', bookmark: @bookmark %> </button></div>
 
-<button type="button" class="btn  my-2"><%=  render 'form', bookmark: @bookmark %> </button>
-<div id='newBookMark'></div>
+<div class= 'card-deck'>
 
-  <div class= 'card-deck'>
-
-    <div class="card mx-auto col-md- mb-2">
-      <div class="row">
+  <div id="data" class="card mx-auto col-md- mb-2">
+    <div class="row">
+    
+  <% @bookmarks.each do |bookmark| %>  
+    
+    <div id = "<%=@bookmark.id%>" class="col-md-4">
+      <div class="card-header">
+        <h4> <%= bookmark.name %></h4> 
+        <h5 class="card-body pr-4"><%= bookmark.url %> </h5>
+        <div><p class="card-user pr-4">
+          <%= bookmark.categories.each do |c| %>
+              <%= c %> <br>
+          <% end %></p>
+        <small class="text-muted display-12">
       
-    <% @bookmarks.each do |bookmark| %>  
-      
-      <div class="col-md-4">
-        <div class="card-header">
-          <h4> <%= bookmark.name %></h4> 
-          <h5 class="card-body pr-4"><%= bookmark.url %> </h5>
-          <div><p class="card-user pr-4">
-            <%= bookmark.categories.each do |c| %>
-                <%= c %> <br>
-            <% end %></p>
-          </div>
-          
-          <small class="text-muted display-12">created_at : <%= link_to time_ago_in_words(bookmark.created_at),bookmark %></small>
-          
+          <td><%= link_to 'Edit', edit_bookmark_path(bookmark), remote: true %></td>
+          <td><%= link_to 'Destroy', bookmark, method: :delete, data: { confirm: 'Are you sure?' }, remote: true %></td>
+        </small>
+
         </div>
+        <small class="text-muted display-12">created_at : <%= link_to time_ago_in_words(bookmark.created_at),bookmark %></small>
+    
       </div>
-    <% end %>
-    <br>
-    <hr>
-
-  </div>
+    </div>
+  <% end %>
+  <br>
+  <hr>
 </div>
   
   
